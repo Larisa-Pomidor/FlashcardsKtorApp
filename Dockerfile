@@ -2,8 +2,8 @@ FROM openjdk:8
 
 WORKDIR /usr/src/app
 
-COPY . .
+COPY gradlew /app/gradlew
 
-RUN ./gradlew build
+RUN chmod +x /app/gradlew build
 
 CMD ["java", "-jar", "build/libs/untitled-jvm-1.0-SNAPSHOT.jar"]
