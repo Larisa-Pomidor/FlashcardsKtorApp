@@ -2,8 +2,6 @@ FROM openjdk:8
 
 WORKDIR /app
 
-COPY gradlew /app/gradlew
-
 RUN chmod +x /app/gradlew
 
 RUN /app/gradlew build
