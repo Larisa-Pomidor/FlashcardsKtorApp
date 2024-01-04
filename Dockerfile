@@ -1,6 +1,6 @@
 FROM openjdk:8
 
-WORKDIR /usr/src/app
+WORKDIR /app
 
 COPY gradlew /app/gradlew
 
