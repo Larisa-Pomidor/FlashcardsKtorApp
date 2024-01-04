@@ -20,7 +20,7 @@ class StudyService() {
             .where { CardsEntity.score less 0}
             .map {
                 Card(it[CardsEntity.id] ?: -1, it[CardsEntity.front] ?: "",
-                    it[CardsEntity.back] ?: "", it[CardsEntity.created].toString() ?: "",
+                    it[CardsEntity.back] ?: "", it[CardsEntity.created].toString(),
                     it[CardsEntity.imageUrl] ?: "", it[CardsEntity.score] ?: -1)
             }
     }

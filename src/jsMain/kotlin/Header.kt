@@ -1,10 +1,13 @@
+import js.core.get
 import react.FC
+import react.Key
 import react.Props
 import react.createElement
 import react.router.Route
 import react.router.Routes
+import react.router.useParams
 
-val Header = FC<Props>{
+val Header = FC<Props> {
     Routes {
         Route {
             path = "/study"
@@ -18,5 +21,13 @@ val Header = FC<Props>{
             path = "/edit"
             element = createElement(EditCardComponent)
         }
-    }
+        Route {
+            path = "/add"
+            element = createElement(AddCardComponent)
+        }
+        Route {
+            path = "/edit/:cardId"
+            element = createElement(EditCardComponent)
+        }
+   }
 }

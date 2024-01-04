@@ -37,7 +37,8 @@ val CardsComponent = FC<Props> {
                 }
                 div {
                     a {
-                        href = "/edit"
+                        href = "/edit/${card.id}"
+                        + "Edit"
                     }
                 }
             }
