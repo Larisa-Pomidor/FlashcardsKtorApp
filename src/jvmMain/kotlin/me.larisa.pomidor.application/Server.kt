@@ -26,7 +26,7 @@ fun HTML.index() {
     }
 }
 fun main() {
-    embeddedServer(Netty, port = 8089, host = "127.0.0.1") {
+    embeddedServer(Netty, port = 8080, host = "127.0.0.1") {
 
         configureKoin()
         configureRouting()
