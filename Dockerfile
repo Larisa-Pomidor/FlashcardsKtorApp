@@ -6,6 +6,6 @@ COPY . /app
 
 RUN chmod +x /app/gradlew
 
-RUN /app/gradlew build
+RUN ./gradlew build
 
 CMD ["java", "-jar", "/app/build/libs/untitled-jvm-1.0-SNAPSHOT.jar"]
