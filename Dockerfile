@@ -1,4 +1,4 @@
-FROM openjdk:8-jdk-alpine
+FROM adoptopenjdk:8-jdk-hotspot-bionic
 
 WORKDIR /app
 
