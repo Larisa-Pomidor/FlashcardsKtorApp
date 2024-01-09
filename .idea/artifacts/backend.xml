@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="backend">
+    <output-path>$PROJECT_DIR$/build/libs</output-path>
+    <root id="archive" name="backend.jar">
+      <element id="module-output" name="untitled.jvmMain" />
+    </root>
+  </artifact>
+</component>

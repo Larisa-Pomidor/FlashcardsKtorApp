@@ -1,11 +1,13 @@
-import dto.CardDto
+package me.larisa.pomidor.application
+
+import me.larisa.pomidor.application.dto.CardDto
 import io.ktor.client.HttpClient
 import io.ktor.client.call.*
 import io.ktor.client.plugins.contentnegotiation.*
 import io.ktor.client.request.*
 import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.*
-import models.Card
+import me.larisa.pomidor.application.models.Card
 
 val jsonClient = HttpClient {
     install(ContentNegotiation) {

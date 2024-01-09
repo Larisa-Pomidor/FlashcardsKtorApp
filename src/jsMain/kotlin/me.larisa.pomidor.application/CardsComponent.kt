@@ -1,20 +1,16 @@
-import csstype.px
-import csstype.rgb
-import emotion.react.css
+package me.larisa.pomidor.application
+
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
-import models.Card
-import react.*
-import react.dom.html.InputType
+import me.larisa.pomidor.application.models.Card
+import react.FC
+import react.Props
 import react.dom.html.ReactHTML.a
 import react.dom.html.ReactHTML.div
-import react.dom.html.ReactHTML.img
-import react.dom.html.ReactHTML.input
-import react.dom.html.ReactHTML.li
-import react.dom.html.ReactHTML.ul
+import react.useEffectOnce
+import react.useState
 
-
-val StudyComponent = FC<Props> {
+val CardsComponent = FC<Props> {
     var cardsList by useState(emptyList<Card>())
 
     useEffectOnce {
@@ -30,13 +26,17 @@ val StudyComponent = FC<Props> {
                     +card.back
                 }
                 div {
-                    +card.front
-                }
-                img {
-                    src=card.imageUrl
+                    onClick = {
+                        MainScope().launch {
+                            deleteCard(card)
+                        }
+                    }
                 }
                 div {
-
+                    a {
+                        href = "/edit/${card.id}"
+                        + "Edit"
+                    }
                 }
             }
         }

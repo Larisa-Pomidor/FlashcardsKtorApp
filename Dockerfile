@@ -1,11 +1,10 @@
-FROM adoptopenjdk:8-jdk-hotspot-bionic
-
+FROM gradle:jdk8 as builder
 WORKDIR /app
+COPY src ./src
+COPY build.gradle.kts ./build.gradle.kts
+RUN --mount=type=cache,target=./.gradle gradle clean test install
 
-COPY . /app
-
-RUN chmod +x /app/gradlew
-RUN ./gradlew wrapper --gradle-version=7.4
-RUN ./gradlew clean build --debug
-
-CMD ["./gradlew", "run"]
+FROM openjdk:8 as backend
+WORKDIR /root
+COPY --from=builder /app/build/libs ./
+CMD ["java", "-jar", "/root/backend.jar"]

@@ -1,4 +1,4 @@
-package models
+package me.larisa.pomidor.application.models
 
 import kotlinx.serialization.Serializable
 

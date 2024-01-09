@@ -60,10 +60,10 @@ kotlin {
                 implementation("ch.qos.logback:logback-classic:1.2.6")
 
                 // koin
-                implementation("io.insert-koin:koin-ktor:$koin_ktor_version")
-                implementation("io.insert-koin:koin-logger-slf4j:$koin_ktor_version")
-                implementation("io.insert-koin:koin-annotations:$koin_ksp_version")
-                implementation("io.insert-koin:koin-annotations:$koin_ksp_version")
+                implementation("io.insert-koin:koin-ktor:3.4.1")
+                implementation("io.insert-koin:koin-logger-slf4j:3.4.1")
+                implementation("io.insert-koin:koin-annotations:1.2.1")
+                implementation("io.insert-koin:koin-annotations:1.2.1")
             }
         }
         val jvmTest by getting
@@ -95,4 +95,42 @@ tasks.named<Copy>("jvmProcessResources") {
 tasks.named<JavaExec>("run") {
     dependsOn(tasks.named<Jar>("jvmJar"))
     classpath(tasks.named<Jar>("jvmJar"))
+}
+
+tasks.withType<Jar> {
+    doLast {
+        println("Task Name: $name")
+        println("Task Type: ${this@withType}")
+    }
+    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
+//    if (name.startsWith("jsJar")) {
+//        archiveFileName.set("frontend.jar")
+//        manifest {
+//            attributes["Main-Class"] = "me.larisa.pomidor.application.ServerKt"
+//        }
+//        duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+//
+//        from(sourceSets.main.get().output)
+//
+//        dependsOn(configurations.runtimeClasspath)
+//        from({
+//            configurations.runtimeClasspath.get().filter { it.name.endsWith("jar") }.map { zipTree(it) }
+//        })
+//    }
+
+    if (name.startsWith("jvmJar")) {
+        archiveFileName.set("backend.jar")
+        manifest {
+            attributes["Main-Class"] = "me.larisa.pomidor.application.ServerKt"
+        }
+        duplicatesStrategy = DuplicatesStrategy.EXCLUDE
+
+        from(sourceSets.main.get().output)
+
+        dependsOn(configurations.runtimeClasspath)
+        from({
+            configurations.runtimeClasspath.get().filter { it.name.endsWith("jar") }.map { zipTree(it) }
+        })
+    }
 }

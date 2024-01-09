@@ -1,11 +1,10 @@
-import js.core.get
+package me.larisa.pomidor.application
+
 import react.FC
-import react.Key
 import react.Props
 import react.createElement
 import react.router.Route
 import react.router.Routes
-import react.router.useParams
 
 val Header = FC<Props> {
     Routes {

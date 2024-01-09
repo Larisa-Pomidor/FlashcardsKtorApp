@@ -1,46 +1,38 @@
-import dto.CardDto
-import io.ktor.client.fetch.*
+package me.larisa.pomidor.application
+
+import me.larisa.pomidor.application.dto.CardDto
+import js.core.get
 import kotlinx.coroutines.MainScope
 import kotlinx.coroutines.launch
-import react.FC
-import react.Props
+import react.*
 import react.dom.html.ButtonType
 import react.dom.html.InputType
-import react.dom.html.ReactHTML.button
+import react.dom.html.ReactHTML
 import react.dom.html.ReactHTML.div
-import react.dom.html.ReactHTML.form
-import react.dom.html.ReactHTML.input
-import react.dom.html.ReactHTML.label
-import react.useState
+import react.router.useNavigate
+import react.router.useParams
 
-val AddCardComponent = FC<Props> {
+val EditCardComponent = FC<Props>{
+    val navigate = useNavigate()
+    val cardId = useParams()["cardId"]?.toIntOrNull() ?: -1
+
     val (front, setFront) = useState("")
     val (back, setBack) = useState("")
     val (imageUrl, setImageUrl) = useState("")
 
-    val handleSubmit: (Event) -> Unit = { event ->
-        event.preventDefault()
-
-        val newCard = CardDto(
-            front = front,
-            back = back,
-            imageUrl = imageUrl
-        )
-
+    useEffectOnce {
         MainScope().launch {
-            addCard(newCard)
+            val cardApi = getCardById(cardId)
+            setBack(cardApi.back)
+            setFront(cardApi.front)
+            setImageUrl(cardApi.imageUrl)
         }
-
-        setFront("")
-        setBack("")
-        setImageUrl("")
     }
-
     div {
-        form {
-            label {
+        ReactHTML.form {
+            ReactHTML.label {
                 +"Front:"
-                input {
+                ReactHTML.input {
                     type = InputType.text
                     value = front
                     onChange = { event ->
@@ -48,9 +40,9 @@ val AddCardComponent = FC<Props> {
                     }
                 }
             }
-            label {
+            ReactHTML.label {
                 +"Back:"
-                input {
+                ReactHTML.input {
                     type = InputType.text
                     value = back
                     onChange = { event ->
@@ -58,9 +50,9 @@ val AddCardComponent = FC<Props> {
                     }
                 }
             }
-            label {
+            ReactHTML.label {
                 +"Image URL:"
-                input {
+                ReactHTML.input {
                     type = InputType.text
                     value = imageUrl
                     onChange = { event ->
@@ -68,26 +60,17 @@ val AddCardComponent = FC<Props> {
                     }
                 }
             }
-            button {
+            ReactHTML.button {
                 type = ButtonType.button
                 onClick = { event ->
                     event.preventDefault()
-
-                    val newCard = CardDto(
-                        front = front,
-                        back = back,
-                        imageUrl = imageUrl
-                    )
-
                     MainScope().launch {
-                        addCard(newCard)
+                        val card = CardDto(back, front, imageUrl)
+                        updateCard(cardId, card)
+                        navigate("/cards")
                     }
-
-                    setFront("")
-                    setBack("")
-                    setImageUrl("")
                 }
-                +"Add Card"
+                +"Update Card"
             }
         }
     }

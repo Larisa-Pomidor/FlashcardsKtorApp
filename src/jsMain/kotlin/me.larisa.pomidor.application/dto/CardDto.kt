@@ -1,4 +1,4 @@
-package dto
+package me.larisa.pomidor.application.dto
 
 import kotlinx.serialization.Serializable
 
