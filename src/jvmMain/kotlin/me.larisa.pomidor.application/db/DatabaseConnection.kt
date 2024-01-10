@@ -15,4 +15,18 @@ object DatabaseConnection {
             ?: throw IllegalArgumentException("Database password is not configured.")
 
     )
+
+//    val database = Database.connect (
+//        url = "jdbc:postgresql://postgres:5432/flashcards?currentSchema=info",
+//        driver = "org.postgresql.Driver",
+//        user = "postgres",
+//        password = "adminadmin"
+//    )
+
+//    val database = Database.connect (
+//        url = "jdbc:mysql://mysql:3306/flashcards",
+//        driver = "com.mysql.cj.jdbc.Driver",
+//        user = "ktor",
+//        password = "adminadmin"
+//    )
 }
