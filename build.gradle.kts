@@ -58,6 +58,7 @@ kotlin {
                 implementation("org.postgresql:postgresql:42.7.1")
                 implementation("org.slf4j:slf4j-api:1.7.32")
                 implementation("ch.qos.logback:logback-classic:1.2.6")
+                implementation("io.ktor:ktor-server-cors-jvm:2.0.1")
 
                 // koin
                 implementation("io.insert-koin:koin-ktor:3.4.1")

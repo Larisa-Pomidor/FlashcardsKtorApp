@@ -1,6 +1,6 @@
 package me.larisa.pomidor.application
 
-import io.ktor.http.HttpStatusCode
+import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.*
 import io.ktor.server.application.*
 import io.ktor.server.engine.embeddedServer
@@ -12,6 +12,7 @@ import io.ktor.server.routing.*
 import kotlinx.html.*
 import me.larisa.pomidor.application.plugins.configureRouting
 import io.ktor.server.plugins.contentnegotiation.*
+import io.ktor.server.plugins.cors.routing.*
 import me.larisa.pomidor.application.plugins.configureKoin
 
 fun HTML.index() {
@@ -42,6 +43,15 @@ fun main() {
         }
         install(ContentNegotiation) {
             json()
+        }
+        install(CORS) {
+            allowMethod(HttpMethod.Options)
+            allowMethod(HttpMethod.Put)
+            allowMethod(HttpMethod.Post)
+            allowMethod(HttpMethod.Patch)
+            allowMethod(HttpMethod.Delete)
+            allowHeader(HttpHeaders.ContentType)
+            anyHost()
         }
     }.start(wait = true)
 }
