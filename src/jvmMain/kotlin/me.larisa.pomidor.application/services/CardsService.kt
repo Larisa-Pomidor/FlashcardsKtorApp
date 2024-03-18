@@ -47,11 +47,13 @@ class CardsService() {
         }
     }
 
-    fun updateById(id: Int, card: CardDto): Int {
+    fun updateById(id: Int, card: Card): Int {
         return db.update(CardsEntity) {
             set(it.back, card.back)
             set(it.front, card.front)
             set(it.imageUrl, card.imageUrl)
+            //set(it.created, card.created)
+            set(it.score, card.score)
             where {
                 it.id eq id
             }

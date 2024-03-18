@@ -34,7 +34,7 @@ suspend fun deleteCard(card: Card) {
     jsonClient.delete("/api/v1/cards/${card.id}")
 }
 
-suspend fun updateCard(id: Int, card: CardDto) {
+suspend fun updateCard(id: Int, card: Card) {
     jsonClient.put("/api/v1/cards/${id}") {
         contentType(ContentType.Application.Json)
         setBody(card)

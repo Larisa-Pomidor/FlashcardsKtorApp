@@ -53,9 +53,9 @@ fun Application.cardsRoutes() {
         }
         put("/api/v1/cards/{id}") {
             val id = call.parameters["id"]?.toInt() ?: -1
-            val cardDto = call.receive<CardDto>()
+            val card = call.receive<Card>()
 
-            val rowsUpdated = cardsService.updateById(id, cardDto)
+            val rowsUpdated = cardsService.updateById(id, card)
 
             if (rowsUpdated == 1) {
                 call.respond(HttpStatusCode.OK)

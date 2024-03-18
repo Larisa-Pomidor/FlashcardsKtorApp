@@ -66,7 +66,7 @@ val EditCardComponent = FC<Props>{
                     event.preventDefault()
                     MainScope().launch {
                         val card = CardDto(back, front, imageUrl)
-                        updateCard(cardId, card)
+                        //updateCard(cardId, card)
                         navigate("/cards")
                     }
                 }
